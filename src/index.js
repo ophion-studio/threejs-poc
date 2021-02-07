@@ -24,6 +24,25 @@ scene.add(camera)
 
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
+controls.enablePan = false
+controls.enableRotate = false
+controls.maxPolarAngle = 1.75
+controls.minPolarAngle = 1
+controls.maxDistance = 500
+controls.minDistance = 250
+
+let mouseX = 0
+let mouseY = 0
+
+let windowHalfX = window.innerWidth / 2
+let windowHalfY = window.innerHeight / 2
+
+const onDocumentMouseMove = event => {
+  mouseX = (event.clientX - windowHalfX) / 100;
+  mouseY = (event.clientY - windowHalfY) / 100;
+}
+
+document.addEventListener('mousemove', onDocumentMouseMove)
 
 // Declare model
 const loader = new GLTFLoader()
@@ -41,6 +60,9 @@ const renderer = new THREE.WebGLRenderer({ canvas: canvas })
 const resizeRenderer = () => renderer.setSize(size.width, size.height)
 const resizePixelRatio = () => renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const render = () => {
+  camera.position.x += (mouseX - camera.position.x)
+  camera.position.y += (- mouseY - camera.position.y)
+  camera.lookAt(scene.position)
   controls.update()
   renderer.render(scene, camera)
   window.requestAnimationFrame(render)
