@@ -17,7 +17,9 @@ let size = getSize()
 
 // Declare camera and controls
 const camera = new THREE.PerspectiveCamera(75, size.width / size.height, 1, 1000)
-camera.position.z = 500
+camera.position.x = -50
+camera.position.y = 50
+camera.position.z = 300
 scene.add(camera)
 
 const controls = new OrbitControls(camera, canvas)
@@ -30,7 +32,7 @@ loader.load('models/scene.gltf', data => {
   const object = data.scene
   object.position.set(0, 0, 0)
   object.scale.set(5, 5, 5)
-  object.rotation.set(0.25, 10.5, 0)
+  object.rotation.set(0, 1.75, 0)
   scene.add(object)
 })
 
