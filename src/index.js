@@ -25,7 +25,7 @@ scene.add(camera)
 const controls = new OrbitControls(camera, canvas)
 controls.enableDamping = true
 controls.enablePan = false
-controls.enableRotate = false
+controls.enableRotate = true
 controls.maxPolarAngle = 1.75
 controls.minPolarAngle = 1
 controls.maxDistance = 500
@@ -60,10 +60,10 @@ const renderer = new THREE.WebGLRenderer({ canvas: canvas })
 const resizeRenderer = () => renderer.setSize(size.width, size.height)
 const resizePixelRatio = () => renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const render = () => {
-  camera.position.x += (mouseX - camera.position.x)
-  camera.position.y += (- mouseY - camera.position.y)
-  camera.lookAt(scene.position)
   controls.update()
+  // camera.position.x += (mouseX - camera.position.x)
+  // camera.position.y += (- mouseY - camera.position.y)
+  // camera.lookAt(scene.position)
   renderer.render(scene, camera)
   window.requestAnimationFrame(render)
 }
